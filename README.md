@@ -46,17 +46,29 @@ docker compose up -d
 ```
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ${DOMAIN}.crt
 ```
-- Reboot MacBook
+- Append the following entry to the /etc/hosts file. Substitute x.x.x.x with the IP of the Docker Registry Server and ${DOMAIN} with the correct value
+```
+x.x.x.x private-docker-registry private-docker-registry.${DOMAIN}.it
+```
+- Test DNS resolution
+```
+user@MacBookPro ~ % ping private-docker-registry
+PING private-docker-registry (x.x.x.x): 56 data bytes
+64 bytes from x.x.x.x: icmp_seq=0 ttl=64 time=9.568 ms
+64 bytes from x.x.x.x: icmp_seq=1 ttl=64 time=4.220 ms
+64 bytes from x.x.x.x: icmp_seq=2 ttl=64 time=75.928 ms
+```
 - Open Visual Studio>DockerExtension>REGISTRIES and click on "connect registry"
-- Select Generic Docker Registry and substitute ${DOMAIN} to the correct value
+- Select Generic Docker Registry and substitute ${DOMAIN} with the correct value
 ```
 https://private-docker-registry.${DOMAIN}.it
 ```
 - Do not set any username/password
+- Reboot MacOS
 
 ## PUSH/PULL Docker Images
 ### PUSH
-- Tag Image (e.g. ubuntu image), substitute \${IMAGE_ID} and ${DOMAIN} to the correct values
+- Tag Image (e.g. ubuntu image), substitute \${IMAGE_ID} and ${DOMAIN} with the correct values
 ```
 docker tag ${IMAGE_ID} private-docker-registry.${DOMAIN}.it/ubuntu
 ```
