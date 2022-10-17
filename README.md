@@ -1,6 +1,26 @@
-# private-docker-registry
+# Private Docker Registry
 
-## Server Configuration Guide
+## **Table of Contents**
+- [Private Docker Registry](#private-docker-registry)
+  - [**Table of Contents**](#table-of-contents)
+  - [**Introduction**](#introduction)
+  - [**Server-Side Configurations**](#server-side-configurations)
+    - [Setup System](#setup-system)
+    - [Setup Variables & Certificates](#setup-variables--certificates)
+    - [Setup Volumes](#setup-volumes)
+    - [Start Private Docker Registry](#start-private-docker-registry)
+  - [**Client-Side Configurations**](#client-side-configurations)
+    - [_macOS_](#macos)
+    - [_Windows_](#windows)
+    - [_Ubuntu_](#ubuntu)
+  - [**Push/Pull Docker Images**](#pushpull-docker-images)
+    - [Push Docker Image](#push-docker-image)
+    - [Pull Docker Image](#pull-docker-image)
+
+## **Introduction**
+TODO
+
+## **Server-Side Configurations**
 
 ### Setup System
 - Install softwares
@@ -14,7 +34,7 @@ sudo apt update && sudo apt install ca-certificates
 cd /home/${USER}/private-docker-registry
 ```
 - Change MYUSER variable in .env file -> set equal to the output of "echo ${USER}"
-- Change DOMAIN variable in .env file -> set it to your desired value (e.g. DOMAIN=mydomain)
+- Change DOMAIN variable in .env file -> set DOMAIN to your desired value (e.g. DOMAIN=mydomain)
 - Export DOMAIN variable
 ```
 export DOMAIN=mydomain
@@ -38,15 +58,15 @@ sudo mkdir -p /mnt/private-docker-registry
 ```
 docker compose up -d
 ```
-
-## Client Side Configurations
-### macOS
+---
+## **Client-Side Configurations**
+### _macOS_
 - Copy Self-Signed Certificate on macOS
-- Setup Self-Signed Certificate: substitute ${DOMAIN} to the correct value
+- Setup Self-Signed Certificate: in the following command, substitute ${DOMAIN} with the value used on the server-side configuration
 ```
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ${DOMAIN}.crt
 ```
-- Append the following entry to the /etc/hosts file. Substitute x.x.x.x with the IP of the Docker Registry Server and ${DOMAIN} with the correct value
+- Append the following entry to the /etc/hosts file. Substitute x.x.x.x with the IP of the Docker Registry Server and ${DOMAIN} with the value used on the server-side configuration
 ```
 x.x.x.x private-docker-registry private-docker-registry.${DOMAIN}.it
 ```
@@ -59,15 +79,23 @@ PING private-docker-registry (x.x.x.x): 56 data bytes
 64 bytes from x.x.x.x: icmp_seq=2 ttl=64 time=75.928 ms
 ```
 - Open Visual Studio>DockerExtension>REGISTRIES and click on "connect registry"
-- Select Generic Docker Registry and substitute ${DOMAIN} with the correct value
+- Select Generic Docker Registry use the following URI. Remember to substitute ${DOMAIN} with the value used on the server-side configuration.
 ```
 https://private-docker-registry.${DOMAIN}.it
 ```
 - Do not set any username/password
 - Reboot MacOS
 
-## PUSH/PULL Docker Images
-### PUSH
+### _Windows_
+TODO
+
+### _Ubuntu_
+TODO
+
+---
+
+## **Push/Pull Docker Images**
+### Push Docker Image
 - Tag Image (e.g. ubuntu image), substitute \${IMAGE_ID} and ${DOMAIN} with the correct values
 ```
 docker tag ${IMAGE_ID} private-docker-registry.${DOMAIN}.it/ubuntu
@@ -77,7 +105,7 @@ docker tag ${IMAGE_ID} private-docker-registry.${DOMAIN}.it/ubuntu
 docker push private-docker-registry.${DOMAIN}.it/ubuntu
 ```
 
-### PULL
+### Pull Docker Image
 ```
 docker pull private-docker-registry.${DOMAIN}.it/ubuntu
 ```
