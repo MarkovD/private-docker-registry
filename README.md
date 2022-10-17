@@ -5,7 +5,7 @@
   - [**Table of Contents**](#table-of-contents)
   - [**Introduction**](#introduction)
   - [**Server-Side Configurations**](#server-side-configurations)
-    - [Setup System](#setup-system)
+    - [Setup System (Ubuntu20.04)](#setup-system-ubuntu2004)
     - [Setup Variables & Certificates](#setup-variables--certificates)
     - [Setup Volumes](#setup-volumes)
     - [Start Private Docker Registry](#start-private-docker-registry)
@@ -22,7 +22,8 @@ TODO
 
 ## **Server-Side Configurations**
 
-### Setup System
+### Setup System (Ubuntu20.04)
+- Install Docker and Docker Compose plugin (see [this guide](https://docs.docker.com/compose/install/linux/))
 - Install softwares
 ```
 sudo apt update && sudo apt install ca-certificates
