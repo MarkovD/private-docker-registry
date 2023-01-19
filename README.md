@@ -6,7 +6,7 @@
   - [**Introduction**](#introduction)
   - [**Server-Side Configurations**](#server-side-configurations)
     - [Setup System (Ubuntu20.04)](#setup-system-ubuntu2004)
-    - [Setup Variables & Certificates](#setup-variables--certificates)
+    - [Setup Variables](#setup-variables)
     - [Setup Volumes](#setup-volumes)
     - [Start Private Docker Registry](#start-private-docker-registry)
   - [**Client-Side Configurations**](#client-side-configurations)
@@ -32,7 +32,7 @@ sudo apt update && sudo apt install ca-certificates
 - Obtain a Certificate from a CA (Out of Scope)
 - Download This Repo @ /home/${USER}/
 
-### Setup Variables & Certificates
+### Setup Variables
 - Change Directory
 ```
 cd /home/${USER}/private-docker-registry
