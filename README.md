@@ -1,7 +1,33 @@
-# private-docker-registry
+# Private Docker Registry
 
-## Server Configuration Guide
+## **Table of Contents**
+- [Private Docker Registry](#private-docker-registry)
+  - [**Table of Contents**](#table-of-contents)
+  - [**Introduction**](#introduction)
+  - [**Server-Side Configurations**](#server-side-configurations)
+    - [Setup System (Ubuntu20.04)](#setup-system-ubuntu2004)
+    - [Setup Variables & Certificates](#setup-variables--certificates)
+    - [Setup Volumes](#setup-volumes)
+    - [Start Private Docker Registry](#start-private-docker-registry)
+  - [**Client-Side Configurations**](#client-side-configurations)
+    - [_macOS_](#macos)
+    - [_Windows_](#windows)
+    - [_Ubuntu_](#ubuntu)
+  - [**Push/Pull Docker Images**](#pushpull-docker-images)
+    - [Push Docker Image](#push-docker-image)
+    - [Pull Docker Image](#pull-docker-image)
 
+## **Introduction**
+TODO
+
+## **Server-Side Configurations**
+
+### Setup System (Ubuntu20.04)
+- Install Docker and Docker Compose plugin (see [this guide](https://docs.docker.com/compose/install/linux/))
+- Install softwares
+```
+sudo apt update && sudo apt install ca-certificates
+```
 ### Setup System
 - Obtain a Certificate from a CA (Out of Scope)
 - Download This Repo @ /home/${USER}/
@@ -31,7 +57,7 @@ docker compose up -d
 ```
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt
 ```
-- Append the following entry to the /etc/hosts file. Substitute x.x.x.x with the IP of server that hosts the Docker Registry Server and DOMAIN with the correct value
+- Append the following entry to the /etc/hosts file. Substitute x.x.x.x with the IP of the Docker Registry Server and ${DOMAIN} with the correct value
 ```
 x.x.x.x private-docker-registry private-docker-registry.DOMAIN.it
 ```
@@ -51,8 +77,16 @@ https://private-docker-registry.DOMAIN.it
 - Do not set any username/password
 - Reboot MacOS
 
-## PUSH/PULL Docker Images
-### PUSH
+### _Windows_
+TODO
+
+### _Ubuntu_
+TODO
+
+---
+
+## **Push/Pull Docker Images**
+### Push Docker Image
 - Tag Image (e.g. ubuntu image), substitute \${IMAGE_ID} and ${DOMAIN} with the correct values
 ```
 docker tag ${IMAGE_ID} private-docker-registry.${DOMAIN}.it/ubuntu
@@ -62,7 +96,7 @@ docker tag ${IMAGE_ID} private-docker-registry.${DOMAIN}.it/ubuntu
 docker push private-docker-registry.${DOMAIN}.it/ubuntu
 ```
 
-### PULL
+### Pull Docker Image
 ```
 docker pull private-docker-registry.${DOMAIN}.it/ubuntu
 ```
