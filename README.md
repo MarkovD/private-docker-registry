@@ -81,7 +81,30 @@ https://private-docker-registry.DOMAIN.it
 TODO
 
 ### _Ubuntu_
-TODO
+- Make sure to have the certificate of the CA (ca.crt) that signed the private registry certificate
+```
+sudo cp ca.crt /usr/local/share/ca-certificates/
+sudo update-ca-certificates
+```
+- Append the following entry to the /etc/hosts file. Substitute x.x.x.x with the IP of the Docker Registry Server and ${DOMAIN} with the correct value
+```
+x.x.x.x private-docker-registry private-docker-registry.DOMAIN.it
+```
+- Test DNS resolution
+```
+user@ubuntu ~ % ping private-docker-registry
+PING private-docker-registry (x.x.x.x): 56 data bytes
+64 bytes from x.x.x.x: icmp_seq=0 ttl=64 time=9.568 ms
+64 bytes from x.x.x.x: icmp_seq=1 ttl=64 time=4.220 ms
+64 bytes from x.x.x.x: icmp_seq=2 ttl=64 time=75.928 ms
+```
+- Test
+```
+docker pull ubuntu:20.04
+docker tag ubuntu:20.04 private-docker-registry.DOMAIN.it/my-ubuntu
+docker push private-docker-registry.DOMAIN.it/my-ubuntu
+docker pull private-docker-registry.DOMAIN.it/my-ubuntu
+```
 
 ---
 
