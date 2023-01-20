@@ -45,6 +45,21 @@ cd /home/${USER}/private-docker-registry
 ```
 sudo mkdir -p /mnt/private-docker-registry
 ```
+- Create CA certificate (.key and .crt) folder
+```
+mkdir -p /home/${USER}/private-docker-registry/certs
+```
+- Create authentication folder and auth file (htpasswd)
+```
+mkdir -p /home/${USER}/private-docker-registry/auth
+touch /home/${USER}/private-docker-registry/auth
+```
+### Setup Authentication
+- Set user account (username: consultant - password: consultant)
+```
+htpasswd  -Bbn consultant consultant > /home/${USER}/private-docker-registry/auth/htpasswd
+```
+
 
 ### Start Private Docker Registry
 ```

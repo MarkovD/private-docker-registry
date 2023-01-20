@@ -10,7 +10,11 @@ services:
       REGISTRY_HTTP_ADDR: 0.0.0.0:443
       REGISTRY_HTTP_TLS_CERTIFICATE: /certs/${CERT_NAME}.crt
       REGISTRY_HTTP_TLS_KEY: /certs/${CERT_NAME}.key
+      REGISTRY_AUTH: htpasswd
+      REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+      REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
       REGISTRY_STORAGE_DELETE_ENABLED: "true"
     volumes:
       - /mnt/private-docker-registry:/var/lib/registry
       - /home/${MYUSER}/private-docker-registry/certs:/certs
+      - /home/${MYUSER}/private-docker-registry/auth:/auth
