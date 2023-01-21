@@ -8,6 +8,7 @@
     - [Setup System (Ubuntu20.04)](#setup-system-ubuntu2004)
     - [Setup Variables](#setup-variables)
     - [Setup Volumes](#setup-volumes)
+    - [Setup Authentication](#setup-authentication)
     - [Start Private Docker Registry](#start-private-docker-registry)
   - [**Client-Side Configurations**](#client-side-configurations)
     - [_macOS_](#macos)
@@ -89,7 +90,7 @@ PING private-docker-registry (x.x.x.x): 56 data bytes
 ```
 https://private-docker-registry.DOMAIN.it
 ```
-- Do not set any username/password
+- username: consultant; password: consultant
 - Reboot MacOS
 
 ### _Windows_
